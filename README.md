@@ -1,5 +1,5 @@
 # Qizzical-App
-This Quizzical App Game project is a challenge from scrimba advanced react module which is built from figma design using react.js, tailwind css, different react hooks and an external Trivia API.
+This Quizzical Game project is a challenge from scrimba advanced react module which is built from figma design using react.js, tailwind css, different react hooks and an external Trivia API.
 
 # Figma Design
 
