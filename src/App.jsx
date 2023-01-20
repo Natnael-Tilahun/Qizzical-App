@@ -61,7 +61,7 @@ function App() {
   return (
     <div className="bg-[#F5F7FB] min-h-screen relative flex justify-center items-center px-8 md:px-14 py-0">
       <div className="absolute w-20 h-32 md:w-64 md:h-56 right-0 top-0 rounded-l-full bg-[#FFFAD1] z-0 opacity-50"></div>
-      <div className="absolute w-20 h-32 md:w-64 md:h-56 left-0 bottom-0 rounded-r-full bg-[#DEEBF8] z-0 opacity-50"></div>
+      <div className="absolute w-20 h-32 md:w-64 md:h-56 left-0 bottom-0 rounded-r-full bg-[#DEEBF8] z-0 opacity-50 bg-green-200"></div>
       {isStarted ? (
         <Welcome startGame={startGame} />
       ) : (

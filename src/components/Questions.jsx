@@ -42,7 +42,7 @@ function Qun({
   }
 
   return (
-    <div className="h-screen flex justify-center items-center z-10">
+    <div className="min-h-screen flex justify-center items-center z-10 py-5 lg:py-20">
       {!questionsData ? (
         <h1 className="text-3xl font-bold text-[#293264]"> Loading Quiz...</h1>
       ) : (
@@ -59,7 +59,7 @@ function Qun({
                   {q.choices.map((c, i) => (
                     <div key={i}>
                       <button
-                        className={`border-[#293264] border-2 min-w-[90px] py-1 px-2 rounded-lg md:rounded-xl text-[#293264] text-sm md:text-lg bg-none
+                        className={`border-[#293264] border-2 min-w-[90px] py-1 px-2 rounded-lg md:rounded-xl text-[#293264] text-sm  bg-none
                           ${
                             q.selectedChoice == i && q.answerChoosed
                               ? selectedChoiceBtn
