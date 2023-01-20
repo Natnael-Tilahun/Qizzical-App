@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { decode } from "html-entities";
 
 function Qun({
@@ -6,12 +6,9 @@ function Qun({
   noOfSelectedAnswer,
   setNoOfSelectedAnswer,
   setAdjustedQun,
+  setIsAllQunSelected,
 }) {
-  const [answers, setAnswers] = useState([]);
-
   let selectedChoiceBtn = `border-none bg-[#D6DBF5]`;
-
-  console.log(questionsData);
 
   function handleSelectedAns(e, qunNo, choiceNo) {
     if (
@@ -38,11 +35,10 @@ function Qun({
         setNoOfSelectedAnswer((prevState) => prevState + 1);
       }
     }
-    setAnswers([...answers, { qunId: qunNo, qunText: e.target.innerText }]);
   }
 
   return (
-    <div className="h-screen flex justify-center items-center z-10">
+    <div className="min-h-screen flex justify-center items-center z-10 py-5 lg:py-20">
       {!questionsData ? (
         <h1 className="text-3xl font-bold text-[#293264]"> Loading Quiz...</h1>
       ) : (
@@ -50,8 +46,7 @@ function Qun({
           {questionsData.map((q, questionIndex) => {
             return (
               <div key={questionIndex}>
-                {/* <p>{q.question}</p> */}
-                <p className="text-[#293264] text-lg md:text-xl">
+                <p className="text-[#293264] text-lg md:text-xl font-black">
                   {decode(q.question)}
                 </p>
 
@@ -59,7 +54,7 @@ function Qun({
                   {q.choices.map((c, i) => (
                     <div key={i}>
                       <button
-                        className={`border-[#293264] border-2 min-w-[90px] py-1 px-2 rounded-lg md:rounded-xl text-[#293264] text-sm md:text-lg bg-none
+                        className={`border-[#4D5B9E] border-2 min-w-[90px] py-1 px-2 rounded-lg md:rounded-xl text-[#293264] text-sm bg-none
                           ${
                             q.selectedChoice == i && q.answerChoosed
                               ? selectedChoiceBtn
@@ -83,7 +78,11 @@ function Qun({
           </p>
           <button
             className="bg-[#4D5B9E] w-48 text-white p-3 rounded-lg self-center"
-            onClick={() => setIsStarted((prev) => !prev)}
+            onClick={() => {
+              if (noOfSelectedAnswer == 5) {
+                setIsAllQunSelected((prev) => !prev);
+              }
+            }}
           >
             Check Answers
           </button>

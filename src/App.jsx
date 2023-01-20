@@ -1,12 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import Welcome from "./components/Welcome";
 import Questions from "./components/Questions";
+import CheckAnswer from "./components/CheckAnswer";
 
 function App() {
   const [isStarted, setIsStarted] = useState(true);
   const [adjustedQun, setAdjustedQun] = useState([]);
   const [noOfSelectedAnswer, setNoOfSelectedAnswer] = useState(0);
   const dataFetchedRef = useRef(false);
+  const [isAllQunSelected, setIsAllQunSelected] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -35,21 +37,23 @@ function App() {
   }
 
   function adjectQuestions(data) {
-    let q = [];
-    console.log(data);
-    data.map((a, index) => {
-      q[index] = {
+    let questionsArray = [];
+    data.map((eachQun, index) => {
+      questionsArray[index] = {
         id: index,
-        question: a.question,
-        choices: shuffleChoices([...a.incorrect_answers, a.correct_answer]),
-        correctAnswer: a.correct_answer,
+        question: eachQun.question,
+        choices: shuffleChoices([
+          ...eachQun.incorrect_answers,
+          eachQun.correct_answer,
+        ]),
+        correctAnswer: eachQun.correct_answer,
         answerChoosed: false,
         selectedAnsText: "",
         selectedChoice: "",
       };
     });
 
-    setAdjustedQun(q);
+    setAdjustedQun(questionsArray);
   }
 
   function shuffleChoices(choice) {
@@ -64,13 +68,16 @@ function App() {
       <div className="absolute w-20 h-32 md:w-64 md:h-56 left-0 bottom-0 rounded-r-full bg-[#DEEBF8] z-0 opacity-50"></div>
       {isStarted ? (
         <Welcome startGame={startGame} />
-      ) : (
+      ) : !isAllQunSelected ? (
         <Questions
           questionsData={adjustedQun}
           setNoOfSelectedAnswer={setNoOfSelectedAnswer}
           noOfSelectedAnswer={noOfSelectedAnswer}
           setAdjustedQun={setAdjustedQun}
+          setIsAllQunSelected={setIsAllQunSelected}
         />
+      ) : (
+        <CheckAnswer questionsData={adjustedQun} startGame={startGame} />
       )}
     </div>
   );
