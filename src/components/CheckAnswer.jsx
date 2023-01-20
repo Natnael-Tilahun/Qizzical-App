@@ -18,7 +18,7 @@ function CheckAnswer({ questionsData, startGame }) {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center z-10 py-5 lg:py-20">
+    <div className="min-h-screen flex justify-center items-center z-10 py-5 lg:py-12">
       {!questionsData ? (
         <h1 className="text-3xl font-bold text-[#293264]">
           {" "}
